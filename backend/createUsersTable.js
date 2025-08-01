@@ -2,7 +2,7 @@ const pool = require("./db/db");
 
 const createTable = async () => {
   try {
-    const result = await pool.query(`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
@@ -13,14 +13,11 @@ const createTable = async () => {
         last_online TIMESTAMP
       )
     `);
+    console.log("Users table ensured.");
   } catch (error) {
     console.error("Error creating users table:", error);
   }
-
-  (async () => {
-    await createTable();
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })();
 };
 
-createTable();
+module.exports = createTable;
+
