@@ -15,8 +15,6 @@ const createTable = async () => {
     `);
   } catch (error) {
     console.error("Error creating users table:", error);
-  } finally {
-    await pool.end();
   }
 };
 
