@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+// Backend Api
+import API_BASE from "../config";
+
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +16,7 @@ export default function Register() {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/auth/register", {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+// Backend Api
+import API_BASE from "../config";
+
 // React Icons
 import { format, formatDistanceToNow } from "date-fns";
 import { TbLock, TbLockOpen2 } from "react-icons/tb";
@@ -17,7 +20,7 @@ export default function AdminPanel() {
   // Fetching users from backend
   const fetchUsers = () => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/users", {
+    fetch(`${API_BASE}/users`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -81,7 +84,7 @@ export default function AdminPanel() {
       (u) => selectedUsers.includes(u.id) && !u.is_blocked
     );
     for (const user of toBlock) {
-      await fetch(`http://localhost:5000/users/${user.id}/block`, {
+      await fetch(`${API_BASE}/users/${user.id}/block`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -101,7 +104,7 @@ export default function AdminPanel() {
       (u) => selectedUsers.includes(u.id) && u.is_blocked
     );
     for (const user of toUnblock) {
-      await fetch(`http://localhost:5000/users/${user.id}/block`, {
+      await fetch(`${API_BASE}/users/${user.id}/block`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -118,7 +121,7 @@ export default function AdminPanel() {
   const handleDelete = async () => {
     const token = localStorage.getItem("token");
     for (const userId of selectedUsers) {
-      await fetch(`http://localhost:5000/users/${userId}`, {
+      await fetch(`${API_BASE}/users/${userId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
