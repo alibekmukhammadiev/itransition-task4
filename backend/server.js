@@ -4,7 +4,7 @@ const pool = require("./db/db");
 const PORT = process.env.PORT || 5000;
 
 // Import and run createTable
-const createTable = require("./createUserTable");
+const createTable = require("./createUsersTable");
 createTable().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
