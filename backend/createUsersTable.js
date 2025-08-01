@@ -16,6 +16,11 @@ const createTable = async () => {
   } catch (error) {
     console.error("Error creating users table:", error);
   }
+
+  (async () => {
+    await createTable();
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })();
 };
 
 createTable();
